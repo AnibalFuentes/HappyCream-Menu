@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:menu_happy_cream/UI/pages/Menu/menu.dart';
-import 'package:menu_happy_cream/UI/pages/login_page.dart';
 
 import 'package:page_transition/page_transition.dart';
 import 'package:swipeable_button_view/swipeable_button_view.dart';

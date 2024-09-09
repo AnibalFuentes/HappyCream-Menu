@@ -6,7 +6,10 @@ class Product {
   double price;
   bool state;
   bool topping;
-  String categoryId; // Añade este campo
+  bool syrup;
+  String categoryId;
+  int cTopping;
+  int cSyrup;
 
   Product({
     required this.id,
@@ -17,6 +20,9 @@ class Product {
     required this.categoryId,
     required this.price, // Añade este campo
     required this.topping, // Añade este campo
+    required this.syrup,
+    required this.cTopping,
+    required this.cSyrup,
   });
 
   factory Product.fromMap(Map<String, dynamic> map, String id) {
@@ -27,7 +33,10 @@ class Product {
       image: map['image'] ?? '',
       state: map['state'] ?? true,
       topping: map['topping'] ?? true,
+      syrup: map['syrup'] ?? true,
       price: map['price'] ?? 0.0, // Añade este campo
+      cTopping: map['cTopping'] ?? 0,
+      cSyrup: map['cSyrup'] ?? 0,
       categoryId: map['categoryId'] ?? '', // Añade este campo
     );
   }
@@ -38,6 +47,10 @@ class Product {
       'description': description,
       'image': image,
       'state': state,
+      'topping': topping,
+      'syrup': syrup,
+      'cTopping': cTopping,
+      'cSyrup': cSyrup,
       'price': price, // Añade este campo
       'categoryId': categoryId, // Añade este campo
     };

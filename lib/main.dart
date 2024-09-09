@@ -3,15 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:menu_happy_cream/UI/pages/Menu/menu.dart';
-import 'package:menu_happy_cream/UI/pages/home_page.dart';
-import 'package:menu_happy_cream/UI/pages/login_page.dart';
 import 'package:menu_happy_cream/UI/pages/Menu/presentation_page.dart';
-import 'package:menu_happy_cream/UI/pages/sign_up_page.dart';
-import 'package:menu_happy_cream/UI/widgets/navigation_bar.dart';
 import 'package:menu_happy_cream/UI/widgets/splash_screen.dart';
-import 'package:menu_happy_cream/controllers/auth_controller.dart';
 import 'package:menu_happy_cream/controllers/cart_controller.dart';
+import 'package:menu_happy_cream/controllers/syrup_controller.dart';
 import 'package:menu_happy_cream/controllers/topping_controller.dart';
 
 // Controladores que has mencionado anteriormente.
@@ -50,6 +45,7 @@ void main() async {
   Get.put(ProductController());
   Get.put(ToppingController());
   Get.put(CartController()); // Inicializa el CartController
+  Get.put(SyrupController()); // Inicializa el CartController
 
   runApp(
     DevicePreview(
@@ -79,8 +75,8 @@ class MyApp extends StatelessWidget {
         locale:
             DevicePreview.locale(context), // Para probar diferentes locales.
         routes: {
-          '/': (context) =>
-              const SplashScreen(child: MenuPage()), // Pantalla de inicio.
+          '/': (context) => const SplashScreen(
+              child: PresentationPage()), // Pantalla de inicio.
 
           // Agrega más rutas según tu necesidad.
         },

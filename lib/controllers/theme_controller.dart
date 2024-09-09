@@ -1,10 +1,28 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/services.dart';
 
 import 'package:menu_happy_cream/utils/theme/theme.dart';
 
 class ThemeController extends GetxController {
-  Rx<ThemeMode> themeMode = ThemeMode.system.obs;
+  Rx<ThemeMode> themeMode = Rx<ThemeMode>(ThemeMode.system);
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    _updateThemeModeFromSystem();
+  }
+
+  void _updateThemeModeFromSystem() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final brightness = PlatformDispatcher.instance.platformBrightness;
+      themeMode.value =
+          brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+    });
+  }
 
   void toggleTheme() {
     if (themeMode.value == ThemeMode.light) {
