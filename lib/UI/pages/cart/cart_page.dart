@@ -34,7 +34,7 @@ class CartPage extends StatelessWidget {
                 title: Text(
                   category.categoryName,
                   style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
+                      fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 children: category.items.map((item) {
                   final toppingPrice = item.selectedToppings.fold<double>(
@@ -100,14 +100,15 @@ class CartPage extends StatelessWidget {
                       child: ListTile(
                           title: Text(
                             item.productName,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
                           ),
                           subtitle: Text(
-                            '${item.productTopping ? 'Toppings: ${item.selectedToppings.map((t) => t.name).join(", ")}' : ''}\n'
-                            '${item.productSyrup ? 'Salsas: ${item.selectedSyrups.map((s) => s.name).join(", ")}' : ''}'
-                            '\nPrecio: \$${subtotal.toStringAsFixed(2)}\n'
-                            'Total: ${subtotal.toStringAsFixed(2)} x ${item.quantity} = \$${item.totalPrice.toStringAsFixed(2)}\n',
-                          ),
+                              '${item.productTopping ? 'Toppings: ${item.selectedToppings.map((t) => t.name).join(", ")}' : ''}\n'
+                              '${item.productSyrup ? 'Salsas: ${item.selectedSyrups.map((s) => s.name).join(", ")}' : ''}'
+                              '\nPrecio: \$${subtotal.toStringAsFixed(2)}\n'
+                              'Total: ${subtotal.toStringAsFixed(2)} x ${item.quantity} = \$${item.totalPrice.toStringAsFixed(2)}\n',
+                              style: const TextStyle(fontSize: 16)),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -153,43 +154,62 @@ class CartPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Total: \$${cartController.totalPrice.toStringAsFixed(2)}',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              if (cartController.cartList.isNotEmpty)
+                Text(
+                  'Total: \$${cartController.totalPrice.toStringAsFixed(2)}',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  cartController.cartList.isEmpty
-                      ? Text('')
-                      : ElevatedButton(
+                  if (cartController.cartList.isNotEmpty)
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ElevatedButton(
                           onPressed: () {
                             cartController.clearCart();
                             Get.back(); // Regresar a la página anterior
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                Colors.red, // Color rojo para cancelar
+                                Colors.red.shade200, // Color rojo mejorado
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Bordes redondeados
+                            ),
                           ),
                           child: const Text('Cancelar'),
                         ),
-                  cartController.cartList.isEmpty
-                      ? Text('')
-                      : ElevatedButton(
+                      ),
+                    ),
+                  if (cartController.cartList.isNotEmpty)
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ElevatedButton(
                           onPressed: () {
                             _showInfoDialog(context);
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Colors.green, // Color verde para enviar
+                            backgroundColor: Colors
+                                .lightGreen.shade200, // Color verde mejorado
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Bordes redondeados
+                            ),
                           ),
                           child: const Text('Enviar'),
                         ),
+                      ),
+                    ),
                 ],
               ),
             ],
@@ -324,7 +344,7 @@ class CartPage extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pop(context);
+                Get.back();
               },
               child: const Text('Cancelar'),
             ),
@@ -340,6 +360,7 @@ class CartPage extends StatelessWidget {
                     paymentMethod,
                   );
                   cartController.clearCart();
+                  Get.back(); // Regresar a la página anterior
                 }
               },
               child: const Text('Enviar'),
@@ -347,9 +368,7 @@ class CartPage extends StatelessWidget {
           ],
         );
       },
-    ).then((_) {
-      cartController.clearCart();
-    });
+    );
   }
 
   void _showPuntoFisicoForm(BuildContext context) {
@@ -400,14 +419,15 @@ class CartPage extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pop(context);
+                Get.back();
               },
               child: const Text('Cancelar'),
             ),
             TextButton(
               onPressed: () {
                 if (_formKey.currentState?.validate() ?? false) {
-                  Navigator.pop(context);
+                  Get.back();
+                  cartController.clearCart();
                   _sendCartToWhatsApp(
                     cartController,
                     nameController.text,
@@ -422,9 +442,7 @@ class CartPage extends StatelessWidget {
           ],
         );
       },
-    ).then((_) {
-      cartController.clearCart();
-    });
+    );
   }
 }
 

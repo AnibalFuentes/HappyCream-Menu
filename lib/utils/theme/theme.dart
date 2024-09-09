@@ -18,7 +18,7 @@ class TAppTheme {
 
   static ThemeData lightTheme = ThemeData(
       useMaterial3: true,
-      fontFamily: 'Poppins',
+      fontFamily: 'Quicksand',
       brightness: Brightness.light,
       primaryColor: Colors.deepPurple.shade300,
       scaffoldBackgroundColor: Colors.white,
@@ -38,7 +38,7 @@ class TAppTheme {
       expansionTileTheme: TExpansionTileTheme.lightExpansionTileTheme);
   static ThemeData darkTheme = ThemeData(
       useMaterial3: true,
-      fontFamily: 'Poppins',
+      fontFamily: 'Quicksand',
       brightness: Brightness.dark,
       primaryColor: Colors.deepPurple.shade300,
       scaffoldBackgroundColor: Colors.black87,
