@@ -173,9 +173,10 @@ class MenuPage extends StatelessWidget {
                             category.name.toUpperCase(),
                             textAlign: TextAlign.center,
                             style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
+                                fontWeight: FontWeight.bold, fontSize: 22),
                           ),
-                          subtitle: Text(category.description),
+                          subtitle: Text(category.description,
+                              style: const TextStyle(fontSize: 16)),
                           children: products.map((product) {
                             return Card(
                               color: isDarkMode
@@ -241,8 +242,12 @@ class MenuPage extends StatelessWidget {
                                   product.name.capitalizeFirst!,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 14,
+                                    fontSize: 18,
                                   ),
+                                ),
+                                subtitle: Text(
+                                  '\$ ${product.price}',
+                                  style: TextStyle(fontSize: 16),
                                 ),
                                 trailing: Icon(
                                   Icons.add_circle_outline,

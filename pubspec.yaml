@@ -33,23 +33,12 @@ dependencies:
   
   firebase_core: 
   cloud_firestore: 
-  firebase_auth: 
-  firebase_storage:
-  google_sign_in: 
-
-
-  
-  
   cupertino_icons: ^1.0.6
   get: ^4.6.6
-  image_picker: ^1.1.2
-  gap:
-  fluttertoast: 
-  swipeable_button_view:
   page_transition:
-  device_preview: ^1.2.0
   url_launcher: ^6.0.20
   badges: ^3.1.2
+  swipeable_button_view: ^0.0.2
 
 
 dev_dependencies:
@@ -80,16 +69,9 @@ flutter:
     - assets/icon/icon.png
     - assets/icon/google.png
     - assets/icon/facebook.png
-    - assets/icon/granja.png
-    - assets/icon/valla.png
-    - assets/icon/vaca.png
-    - assets/icon/carne.png
-    - assets/icon/granjero.png
-    - assets/icon/granjeroI.png
     - assets/icon/1st.png
     - assets/icon/2st.png
     - assets/icon/3st.png
-    - assets/vaca.jpg
     - assets/Producto.jpg
 
   
