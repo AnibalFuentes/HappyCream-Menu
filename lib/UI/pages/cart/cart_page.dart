@@ -349,17 +349,16 @@ class CartPage extends StatelessWidget {
               child: const Text('Cancelar'),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState?.validate() ?? false) {
                   // Envía el mensaje sin vista previa
-                  _sendCartToWhatsApp(
+                  await _sendCartToWhatsApp(
                     cartController,
                     nameController.text,
                     phoneController.text,
                     addressController.text,
                     paymentMethod,
                   );
-                  cartController.clearCart();
                   Get.back(); // Regresar a la página anterior
                 }
               },
@@ -424,11 +423,11 @@ class CartPage extends StatelessWidget {
               child: const Text('Cancelar'),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState?.validate() ?? false) {
                   Get.back();
-                  cartController.clearCart();
-                  _sendCartToWhatsApp(
+
+                  await _sendCartToWhatsApp(
                     cartController,
                     nameController.text,
                     phoneController.text,
@@ -446,7 +445,7 @@ class CartPage extends StatelessWidget {
   }
 }
 
-void _sendCartToWhatsApp(
+_sendCartToWhatsApp(
   CartController cartController,
   String name,
   String phone,
@@ -464,7 +463,9 @@ void _sendCartToWhatsApp(
   try {
     final Uri url = Uri.parse(whatsappUrl);
     if (await canLaunchUrl(url)) {
-      await launchUrl(url);
+      await launchUrl(url).whenComplete(() {
+        cartController.clearCart();
+      });
     } else {
       Get.snackbar(
         'Error',
