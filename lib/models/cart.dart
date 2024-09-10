@@ -27,6 +27,11 @@ class CartItem {
         selectedToppings.fold(0, (sum, topping) => sum + topping.price);
     return (productPrice + toppingsPrice) * quantity; // Ajuste para multiplicar por la cantidad
   }
+  double get totalPriceU {
+    double toppingsPrice =
+        selectedToppings.fold(0, (sum, topping) => sum + topping.price);
+    return (productPrice + toppingsPrice) ; // Ajuste para multiplicar por la cantidad
+  }
 }
 class CartCategory {
   final String categoryId;

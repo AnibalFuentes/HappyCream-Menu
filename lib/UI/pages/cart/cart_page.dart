@@ -300,6 +300,9 @@ class CartPage extends StatelessWidget {
                     if (value == null || value.isEmpty) {
                       return 'Este campo es obligatorio';
                     }
+                    if (value.length < 10) {
+                      return ' Debe Tener 10 digitos';
+                    }
                     return null;
                   },
                 ),
@@ -409,6 +412,9 @@ class CartPage extends StatelessWidget {
                     if (value == null || value.isEmpty) {
                       return 'Este campo es obligatorio';
                     }
+                    if (value.length < 10) {
+                      return ' Debe Tener 10 digitos';
+                    }
                     return null;
                   },
                 ),
@@ -500,7 +506,7 @@ String _buildCartMessage(
       totalProducts += item.quantity; // Incrementa el contador de productos
 
       message.writeln(
-          "- ${item.productName}: \$${item.productPrice.toStringAsFixed(2)} x ${item.quantity} = \$${item.totalPrice.toStringAsFixed(2)}");
+          "- ${item.productName}: \$${item.totalPriceU.toStringAsFixed(2)} x ${item.quantity} = \$${item.totalPrice.toStringAsFixed(2)}");
 
       if (item.productTopping && item.selectedToppings.isNotEmpty) {
         message.writeln(

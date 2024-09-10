@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:menu_happy_cream/UI/pages/Menu/presentation_page.dart';
+import 'package:menu_happy_cream/UI/widgets/header.dart';
 import 'package:menu_happy_cream/UI/widgets/splash_screen.dart';
 import 'package:menu_happy_cream/controllers/cart_controller.dart';
 import 'package:menu_happy_cream/controllers/syrup_controller.dart';
@@ -58,9 +59,7 @@ class MyApp extends StatelessWidget {
         themeMode: themeController.themeMode.value,
         theme: themeController.lightTheme,
         darkTheme: themeController.darkTheme,
-        routes: {
-          '/': (context) => const SplashScreen(child: PresentationPage()),
-        },
+        home: const PresentationPage(),
       );
     });
   }
